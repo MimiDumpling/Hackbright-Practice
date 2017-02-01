@@ -144,10 +144,16 @@ if tally <= 1:
 else:
 	print typer + "! In an alternate reality, you would prefer a cupcake over a donut! I bet you're suprised!"
 print " "
-sleep(1)
+sleep(3)
 
 
 if tally2 <= 1:
 	print friend + "! In an alternate reality, you would choose a delicious donut over a cupcake! I bet you're NOT suprised!"
 else:
-	print friend + "! In an alternate reality, you would choose a delicious cupcake over a donut! I bet you're NOT suprised!" 		
+	print friend + "! In an alternate reality, you would choose a delicious cupcake over a donut! I bet you're NOT suprised!" 	
+print " "
+sleep(2)
+
+print "That concludes the survey! Thanks for playiing!"
+print " "
+print " "		
