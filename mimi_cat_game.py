@@ -2,22 +2,29 @@ from mimi_cat_game_ascii_images import *
 
 from time import sleep
 
+player1 = ""
+
+score = 0
 
 def menu_choice():
 	print title_image
 
 	print '\n    0 - Main Menu'
 	print '    1 - Play game.'
-	print '    2 - Show high scores.' #write a 'read' function that shows mimi_cat_game_high_score.txt
+	print '    2 - Show high scores.'
 	print '    3 - Exits the program.\n'
 
 	choice = int(raw_input('Meow! Please choose from the menu options: '))
 
 	return choice
 
-#write another function that takes player1's name and saves it in a variable and can return it in main
+#write another function that resets the game state once "game over" happens
+#figure out a way to clear screen between chapters/functions
 
 def play_game():
+	global player1
+
+	print ' '
 	print page_break
 	print cat_with_computer
 
@@ -41,6 +48,9 @@ def play_game():
 
 
 def find_a_snack():
+	print page_break
+	print cat_crouching
+
 	print 'You chose a) Find a snack!\n'
 	sleep(1)
 	print 'Mmm... a delightful scent floats through the air. Smells like Defenseless Prey! Which way does your nose point?\n'
@@ -49,6 +59,11 @@ def find_a_snack():
 
 
 def snack_at_graveyard():
+	global score
+
+	print page_break
+	print graveyard_gates
+
 	print 'You chose a) Left towards the graveyard!\n'
 	sleep(1)
 	print'Mmm... so many delicious smells among the tombstones, but that\'s not all. Your cunning ears detect tiny heartbeats scurrying about. Quick! Catch some mice!\n'
@@ -62,37 +77,63 @@ def snack_at_graveyard():
 
 	answer_one_a_action_a1 = raw_input ('**scratch scratch** Is that a mouse? **scurry scurry** IT\'S A MOUSE! GRAB IT! ').lower()
 	if answer_one_a_action_a1 == 'grab':
+		score += 100
 		print '\nGreat job! You caught the mouse!\n'
 		sleep(1)
+
 	else:
+		score -= 50
 		print '\nWhelp, there\'s always next time.\n'
 		sleep(1)
 	
 	answer_one_a_action_a2 = raw_input ('Oh! What\'s that over there? It\'s just a ball of lint. Ignore it. ').lower()
 	if answer_one_a_action_a2 == 'ignore':
+		score += 100
 		print '\nNice. Good thing we didn\'t get distracted.\n'
 		sleep(1)
+
 	else:
+		score -= 50
 		print '\nLint GLORIOUS LINT! How could I possibly ignore such fun?!\n'
 		sleep(1)
 
 	answer_one_a_action_a3 = raw_input ('**squeak squeak** MOUSE!!! ').lower()
 	if answer_one_a_action_a3 == 'grab':
-		print '\nCongratulations! You\'ve successfully caught mice today. You\'re a superior kitty! Time to go home and take a well deserved nap.\n' 
-		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
-			#if high_score_question == 'yes':
+		score += 100
+		print '\nCongratulations, %s! You\'ve successfully caught mice today. You\'re a superior kitty! Time to go home and take a well deserved nap.\n' % (player1)
+		
+		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
+		if high_score_question == 'yes':
+			print " "
+			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
+			show_high_score("mimi_cat_game_high_score.txt")
+			print " "
+			print "GAME WILL BEGIN AGAIN IN 15 SECONDS"
+			sleep(15)
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores	
 		sleep(1)
+
 	else:
-		print '\nMeh. You tried your best. Tomorrow you\'ll catch more mice. Today, it\'s time to go home and take a nap.\n'
-		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
-			#if high_score_question == 'yes':
+		score -= 50
+		print '\nMeh. You tried your best, %s. Tomorrow you\'ll catch more mice. Today, it\'s time to go home and take a nap.\n' % (player1)
+		
+		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
+		if high_score_question == 'yes':
+			print " "
+			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
+			show_high_score("mimi_cat_game_high_score.txt")
+			print " "
+			print "GAME WILL BEGIN AGAIN IN 15 SECONDS"
+			sleep(15)
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 
 
 def snack_at_forest():
+	print page_break
+	print forest
+
 	print 'You chose b) Right towards the forest!\n'
 	sleep(1)
 	print'The crunch of leaves beneath your paws fills you with confidence. You are a true hunter. Unless of course, there\'s a coyote around. Which there is. Quick! Run away from the coyote!\n'
@@ -118,20 +159,27 @@ def snack_at_forest():
 
 	answer_one_a_action_b3 = raw_input ('Do you hear the coyote anymore? Hmmm... just to be safe, jump onto the branches of this tree and look around. ').lower()
 	if answer_one_a_action_b3 == 'jump':
-		print '\nCongratulations! You\'ve successfully escaped the coyote today. You\'re a superior kitty! Time to go home and take a well deserved nap.\n'	
+		print '\nCongratulations, %s! You\'ve successfully escaped the coyote today. You\'re a superior kitty! Time to go home and take a well deserved nap.\n'	% (player1)
 		sleep(1)
+		
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores	
 	else:
-		print '\nMeh. You tried your best. You\'re missing part of your tail, but consider it a badge of honor. Tomorrow you\'ll show that coyote your true prowess. Today, it\'s time to go home, lick your wounds and take a nap.\n' 	
+		print '\nMeh. You tried your best, %s. You\'re missing part of your tail, but consider it a badge of honor. Tomorrow you\'ll show that coyote your true prowess. Today, it\'s time to go home, lick your wounds and take a nap.\n' % (player1)	
+		
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 
 def snack_at_gas_station():
+	print page_break
+	print gas_pump
+
 	print 'You chose c) Forward towards the gas station!\n'
 	sleep(1)
 	print'Glistening greasy hot dogs sit unattended inside the gast station trash cans. Quick! Get to the delicious hot dogs by jumping on the roofs of refueling cars!\n'
@@ -157,18 +205,20 @@ def snack_at_gas_station():
 
 	answer_one_a_action_c3 = raw_input ('**sniff sniff** Those hot dogs are so close! Jump into the trash can. ').lower()
 	if answer_one_a_action_c3 == 'jump':
-		print '\nCongratulations! You\'ve successfully fit all the hot dogs into your furry belly. You\'re a superior kitty! Time to go home and take a well deserved nap.\n' 	
+		print '\nCongratulations, %s! You\'ve successfully fit all the hot dogs into your furry belly. You\'re a superior kitty! Time to go home and take a well deserved nap.\n' % (player1)	
 		sleep(1)
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores	
 	else:
-		print '\nMeh. You tried your best. You didn\'t get the tasty hot dogs, but maybe you will tomorrow. Today, it\'s time to go home and take a nap.\n' 	
+		print '\nMeh. You tried your best, %s. You didn\'t get the tasty hot dogs, but maybe you will tomorrow. Today, it\'s time to go home and take a nap.\n' % (player1)	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 
@@ -205,18 +255,20 @@ def neighbors_rats():
 
 	answer_one_b_action_a3 = raw_input ('**squeak squeak** RAT!!! ').lower()
 	if answer_one_b_action_a3 == 'grab':
-		print '\nCongratulations! You\'ve successfully caught rats today. You\'re a superior kitty! Time to go home and take a well deserved nap.\n'	
+		print '\nCongratulations, %s! You\'ve successfully caught rats today. You\'re a superior kitty! Time to go home and take a well deserved nap.\n' % (player1)	
 		sleep(1)
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 	else:
-		print '\nMeh. You tried your best. Tomorrow you\'ll catch more rats. Today, it\'s time to go home and take a nap.\n'	
+		print '\nMeh. You tried your best, %s. Tomorrow you\'ll catch more rats. Today, it\'s time to go home and take a nap.\n' % (player1)	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 
@@ -246,18 +298,20 @@ def neighbors_dogs():
 
 	answer_one_b_action_b3 = raw_input ('**sniff sniff** Those dogs are so close! Jump over the fence and back into your own yard. ').lower()
 	if answer_one_b_action_b3 == 'jump':
-		print '\nCongratulations! You\'ve successfully evaded those doggies. You\'re a superior kitty! Time to go home and take a well deserved nap.\n'	
+		print '\nCongratulations, %s! You\'ve successfully evaded those doggies. You\'re a superior kitty! Time to go home and take a well deserved nap.\n' % (player1)	
 		sleep(1)	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 	else:
-		print '\nMeh. You tried your best. One of the dogs nipped your tail. Tomorrow, you\'ll return with vengeance. Today, it\'s time to go home, lick your wounds and take a nap.\n' 	
+		print '\nMeh. You tried your best, %s. One of the dogs nipped your tail. Tomorrow, you\'ll return with vengeance. Today, it\'s time to go home, lick your wounds and take a nap.\n' % (player1) 	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 
@@ -287,18 +341,20 @@ def neighbors_sprinklers():
 
 	answer_one_b_action_c3 = raw_input ('**sprinkle sprinkle** Those sprinklers are so close! Jump over the fence and back into your own yard. ').lower()
 	if answer_one_b_action_c3 == 'jump':
-		print '\nCongratulations! You\'ve successfully evaded those demon sprinklers. You\'re a superior kitty! Time to go home and take a well deserved nap.\n' 	
+		print '\nCongratulations, %s! You\'ve successfully evaded those demon sprinklers. You\'re a superior kitty! Time to go home and take a well deserved nap.\n' % (player1) 	
 		sleep(1)
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores	
 	else:
-		print '\nMeh. You tried your best. One of the sprinklers got you all wet. Tomorrow, you\'ll return with vengeance. Today, it\'s time to go home, dry your fur and take a nap.\n'	
+		print '\nMeh. You tried your best, %s. One of the sprinklers got you all wet. Tomorrow, you\'ll return with vengeance. Today, it\'s time to go home, dry your fur and take a nap.\n' % (player1)	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 
@@ -335,18 +391,20 @@ def nap_laser():
 
 	answer_one_c_action_a3 = raw_input ('**Flicker flicker** The red dot LIVES!!! ').lower()
 	if answer_one_c_action_a3 == 'grab':
-		print '\nCongratulations! You\'ve successfully caught the red dot today. You\'re a superior kitty! Time to take a well deserved nap.\n' 	
+		print '\nCongratulations, %s! You\'ve successfully caught the red dot today. You\'re a superior kitty! Time to take a well deserved nap.\n' % (player1) 	
 		sleep(1)
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 	else:
-		print '\nMeh. You tried your best. Tomorrow you\'ll catch the pesky red laser dot. Today, it\'s time to take a nap.\n' 	
+		print '\nMeh. You tried your best, %s. Tomorrow you\'ll catch the pesky red laser dot. Today, it\'s time to take a nap.\n' % (player1) 	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 
@@ -376,18 +434,20 @@ def nap_vacuum():
 
 	answer_one_c_action_b3 = raw_input ('**VROOOM VROOOM** The vacuum cleaner is so close! Jump onto the couch! ').lower()
 	if answer_one_c_action_b3 == 'jump':
-		print '\nCongratulations! You\'ve successfully evaded that demon vacuum cleaner. You\'re a superior kitty! Time to take a well deserved nap.\n' 	
+		print '\nCongratulations, %s! You\'ve successfully evaded that demon vacuum cleaner. You\'re a superior kitty! Time to take a well deserved nap.\n' % (player1) 	
 		sleep(1)	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 	else:
-		print '\nMeh. You tried your best. The vacuum sucked up part of your tail but you pulled away just in time. Tomorrow, you\'ll return with vengeance. Today, it\'s time to take a nap.\n'
+		print '\nMeh. You tried your best, %s. The vacuum sucked up part of your tail but you pulled away just in time. Tomorrow, you\'ll return with vengeance. Today, it\'s time to take a nap.\n' % (player1)
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 
@@ -417,41 +477,34 @@ def nap_wet_floor():
 
 	answer_one_c_action_c3 = raw_input ('**splash splash** The floor is super wet here! Jump onto the couch! ').lower()
 	if answer_one_c_action_c3 == 'jump':
-		print '\nCongratulations! You\'ve successfully evaded that wet floor. You\'re a superior kitty! Time to take a well deserved nap.\n' 	
+		print '\nCongratulations, %s! You\'ve successfully evaded that wet floor. You\'re a superior kitty! Time to take a well deserved nap.\n' % (player1) 	
 		sleep(1)	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 	else:
-		print '\nMeh. You tried your best. The wet floor got your paws wet. Tomorrow, you\'ll return with vengeance. Today, it\'s time to dry your fur and take a nap.\n' 	
+		print '\nMeh. You tried your best, %s. The wet floor got your paws wet. Tomorrow, you\'ll return with vengeance. Today, it\'s time to dry your fur and take a nap.\n' % (player1) 	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? ').lower()
 			#if high_score_question == 'yes':
+				#write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
 				#append their score to mimi_cat_game_high_score.txt
 				#show the new appended list of high scores
 
 def write_high_score(name, current_high_scores, mimi_cat_game_high_score):
-    '''
-    Given a dictionary of shopping lists write them to a file at file_path. The
-    file will be overwritten if it exists
+	with open(mimi_cat_game_high_score, 'a') as high_scores:
+		items_str = ','.join([name, str(current_high_scores)])
+		high_scores.write(
+			'%s\n' % (items_str))
+	return
 
-    The file format will be:
-        <list_name>:<item1>,<item2>,...<itemN>
 
-    Arguments:
-      lists_by_name:  dict of shopping lists
-      file_path: string path of file to write.
-    Returns:
-      None
-    '''
-    with open(mimi_cat_game_high_score, 'a') as high_scores:
-        
-            items_str = ','.join([name, str(current_high_scores)])
-            high_scores.write(
-                '%s\n' % (items_str))
-    return
+def show_high_score(mimi_cat_game_high_score):
+	with open(mimi_cat_game_high_score) as high_scores:
+		print high_scores.read()
 
 
 def main():
@@ -462,7 +515,7 @@ def main():
 		choice = menu_choice()
 
 		if choice == 0:
-			continue  #continue goes to the next loop iteration
+			continue 
 
 		elif choice == 1:
 			play_game()
@@ -541,8 +594,7 @@ def main():
 				play_game()
 
 		elif choice == 2:
-			write_high_score("commander furr", 43, "mimi_cat_game_high_score.txt")
-			#show high scores using input/output readlines
+			show_high_score("mimi_cat_game_high_score.txt")	
 
 		elif choice == 3: 		
 			break
