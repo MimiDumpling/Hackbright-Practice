@@ -21,6 +21,36 @@ def menu_choice():
 #write another function that resets the game state once "game over" happens
 #figure out a way to clear screen between chapters/functions
 
+
+def write_high_score(name, current_high_scores, mimi_cat_game_high_score):
+	with open(mimi_cat_game_high_score, 'a') as high_scores:
+		items_str = ','.join([name, str(current_high_scores)])
+		high_scores.write(
+			'%s\n' % (items_str))
+	return
+
+
+def show_high_score(mimi_cat_game_high_score):
+	with open(mimi_cat_game_high_score) as high_scores:
+		print high_scores.read()
+
+
+def write_and_show_score_in_game():
+	print " "
+	print "HIGH SCORES:"
+	write_high_score(player1, score, "mimi_cat_game_high_score.txt")
+	show_high_score("mimi_cat_game_high_score.txt")
+	print " "
+	print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
+	sleep(15)
+
+
+def print_game_will_restart():
+	print " "
+	print "GAME WILL RESTART IN 10 SECONDS -- MEOW!"
+	sleep(10)
+
+
 def play_game():
 	global player1
 
@@ -104,18 +134,10 @@ def snack_at_graveyard():
 		
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 
 	else:
 		score -= 50
@@ -123,18 +145,10 @@ def snack_at_graveyard():
 		
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 				
 
 def snack_at_forest():
@@ -179,18 +193,10 @@ def snack_at_forest():
 		
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 
 	else:
 		score -= 50
@@ -198,18 +204,10 @@ def snack_at_forest():
 		
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 
 
 def snack_at_gas_station():
@@ -254,36 +252,20 @@ def snack_at_gas_station():
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)	
+			print_game_will_restart()	
 	else:
 		score -= 50
 		print '\nMeh. You tried your best, %s. You didn\'t get the tasty hot dogs, but maybe you will tomorrow. Today, it\'s time to go home and take a nap.\n' % (player1)	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 
 
 def neighbors_yard():
@@ -332,36 +314,20 @@ def neighbors_rats():
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 	else:
 		score -= 50
 		print '\nMeh. You tried your best, %s. Tomorrow you\'ll catch more rats. Today, it\'s time to go home and take a nap.\n' % (player1)	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 
 
 def neighbors_dogs():
@@ -403,36 +369,20 @@ def neighbors_dogs():
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 	else:
 		score -= 50
 		print '\nMeh. You tried your best, %s. One of the dogs nipped your tail. Tomorrow, you\'ll return with vengeance. Today, it\'s time to go home, lick your wounds and take a nap.\n' % (player1) 	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 
 
 def neighbors_sprinklers():
@@ -474,36 +424,20 @@ def neighbors_sprinklers():
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)	
+			print_game_will_restart()	
 	else:
 		score -= 50
 		print '\nMeh. You tried your best, %s. One of the sprinklers got you all wet. Tomorrow, you\'ll return with vengeance. Today, it\'s time to go home, dry your fur and take a nap.\n' % (player1)	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 
 
 def nap():
@@ -552,36 +486,20 @@ def nap_laser():
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 	else:
 		score -= 50
 		print '\nMeh. You tried your best, %s. Tomorrow you\'ll catch the pesky red laser dot. Today, it\'s time to take a nap.\n' % (player1) 	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 
 
 def nap_vacuum():
@@ -623,36 +541,20 @@ def nap_vacuum():
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 	else:
 		score -= 50
 		print '\nMeh. You tried your best, %s. The vacuum sucked up part of your tail but you pulled away just in time. Tomorrow, you\'ll return with vengeance. Today, it\'s time to take a nap.\n' % (player1)
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 
 
 def nap_wet_floor():
@@ -694,49 +596,20 @@ def nap_wet_floor():
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			print_game_will_restart()
 	else:
 		score -= 50
 		print '\nMeh. You tried your best, %s. The wet floor got your paws wet. Tomorrow, you\'ll return with vengeance. Today, it\'s time to dry your fur and take a nap.\n' % (player1) 	
 
 		high_score_question = raw_input('Would you like to add your score to high scores? Yes or no? ').lower()
 		if high_score_question == 'yes':
-			print " "
-			print "HIGH SCORES:"
-			write_high_score(player1, score, "mimi_cat_game_high_score.txt")
-			show_high_score("mimi_cat_game_high_score.txt")
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
+			write_and_show_score_in_game()
 
 		else:
-			print " "
-			print "GAME WILL RESTART IN 15 SECONDS -- MEOW!"
-			sleep(15)
-
-
-def write_high_score(name, current_high_scores, mimi_cat_game_high_score):
-	with open(mimi_cat_game_high_score, 'a') as high_scores:
-		items_str = ','.join([name, str(current_high_scores)])
-		high_scores.write(
-			'%s\n' % (items_str))
-	return
-
-
-def show_high_score(mimi_cat_game_high_score):
-	with open(mimi_cat_game_high_score) as high_scores:
-		print high_scores.read()
+			print_game_will_restart()
 
 
 def main():
@@ -785,17 +658,17 @@ def main():
 					neighbors_rats()
 
 				elif answer_one_b == 'b':
-					neighbors_dogs
+					neighbors_dogs()
 
 				elif answer_one_b == 'c':
-					neighbors_sprinklers
+					neighbors_sprinklers()
 
 				elif answer_one_b == 'd':
 					break
 
 				else:
 					print 'Whoops! That\'s not an option. Please choose a, b, c, or d.'
-					neighbors_yard
+					neighbors_yard()
 
 			elif answer_one == "c":
 				nap()
